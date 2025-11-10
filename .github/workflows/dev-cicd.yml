@@ -65,14 +65,7 @@ jobs:
             echo "🚀 Redis 컨테이너 배포 중..."
             if [ "$(sudo docker inspect --format='{{.State.Running}}' cubeai-redis 2>/dev/null)" != "true" ]; then
               sudo docker pull redis:alpine
-              sudo docker run -d --name cubeai-redis --network cubeai-network -p 6380:6379 redis:alpine
-            fi
-            
-            # PostgreSQL 컨테이너 배포: 네트워크에 연결, 포트 매핑 (내부 통신용)
-            echo "🐘 PostgreSQL 컨테이너 배포 중..."
-            if [ "$(sudo docker inspect --format='{{.State.Running}}' cubeai-postgres 2>/dev/null)" != "true" ]; then
-              sudo docker pull postgres:latest
-              sudo docker run -d --name cubeai-postgres --network cubeai-network -p 5434:5432 -e POSTGRES_DB="cubeai_dev" -e POSTGRES_USER="cubeai" -e POSTGRES_PASSWORD="cubeai" postgres:latest
+              sudo docker run -d --name redis --network cubeai-network -p 6380:6379 redis:alpine
             fi
             
             echo "🚀 최신 Docker 이미지 Pull 중..."
