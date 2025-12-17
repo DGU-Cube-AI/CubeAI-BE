@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  ai:
+    build:
+      context: ../CubeAI-AI/blockcode
+      dockerfile: Dockerfile
+    image: your-dockerhub-id/cubeai-ai:latest
+    ports:
+      - "8000:8000"
+
+  be:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: your-dockerhub-id/cubeai-be:latest
+    depends_on:
+      - ai
+    ports:
+      - "8080:8080"
+
+  fe:
+    build:
+      context: ../CubeAI-FE
+      dockerfile: Dockerfile
+    image: your-dockerhub-id/cubeai-fe:latest
+    depends_on:
+      - be
+    ports:
+      - "3000:80"
