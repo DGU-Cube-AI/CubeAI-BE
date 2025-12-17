@@ -5,7 +5,7 @@ services:
     build:
       context: ../CubeAI-AI/blockcode
       dockerfile: Dockerfile
-    image: your-dockerhub-id/cubeai-ai:latest
+    image: sunnyanna0/cubeai-ai:latest
     ports:
       - "8000:8000"
 
@@ -13,7 +13,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: your-dockerhub-id/cubeai-be:latest
+    image: sunnyanna0/cubeai-be:latest
     depends_on:
       - ai
     ports:
@@ -23,7 +23,7 @@ services:
     build:
       context: ../CubeAI-FE
       dockerfile: Dockerfile
-    image: your-dockerhub-id/cubeai-fe:latest
+    image: sunnyanna0/cubeai-fe:latest
     depends_on:
       - be
     ports:
