@@ -63,10 +63,11 @@ public class ProjectService {
     public ProjectHistoryResponse saveProject(Long projectId, ProjectSaveRequest request) {
         Project project = projectRepository.findByProjectId(projectId)
                 .orElseThrow(() -> new EntityNotFoundException(ErrorCode.PROJECT_NOT_FOUND));
-        ProjectHistory savedProjectHistory = ProjectHistory.builder()
+        ProjectHistory projectHistory = ProjectHistory.builder()
                 .project(project)
                 .structure(request.structure())
                 .build();
+        ProjectHistory savedProjectHistory = projectHistoryRepository.save(projectHistory);
         return ProjectHistoryResponse.from(savedProjectHistory);
     }
 
